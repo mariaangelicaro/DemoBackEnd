@@ -1,0 +1,30 @@
+{
+  "name": "demobackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariaangelicaro/DemoBackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariaangelicaro/DemoBackEnd/issues"
+  },
+  "homepage": "https://github.com/mariaangelicaro/DemoBackEnd#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mockingoose": "^2.16.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.1"
+  }
+}
