@@ -1,7 +1,8 @@
 const userService = require('../services/userService');
 
 
-export default {
+const userController = {
+
     async register(req, res) {
         try {
             const user = await userService.register(req.body);
@@ -31,3 +32,5 @@ export default {
         }
     }
 };
+
+module.exports = userController;
