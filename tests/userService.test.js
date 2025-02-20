@@ -57,6 +57,32 @@ describe('UserService', () => {
     });
 
     describe('User Login', () => {
+        test('It should login a user and return a token', async () => {
+            const mockEmail = 'maria@rodriguez.com';
+            const mockPassword = 'password';
+            const mockHashedPassword = 'hashed-password';
+            const mockUser = new User({
+                email: mockEmail,
+                password: mockHashedPassword,
+                username: 'mariarodri'
+            });
 
+            bcrypt.compare.mockResolvedValue(true);
+            mockingoose(User).toReturn(mockUser, 'findOne');
+
+            const expectedResult = {
+                token: 'some-jwt-token',
+                user: mockUser
+            };
+
+            const result = await userService.login({
+                email: mockEmail,
+                password: mockPassword
+            });
+
+            expect(result.token).toBe(expectedResult.token);
+            expect(result.user.email).toBe(mockEmail);
+            expect(result.user.password).toBe(mockHashedPassword);
+        });
     });
 });

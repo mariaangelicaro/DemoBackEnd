@@ -108,5 +108,5 @@ describe('ImageService', () => {
             //Assert:
             expect(result).toBe(true);
         });
-    })
-})
+    });
+});

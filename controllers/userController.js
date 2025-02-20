@@ -21,16 +21,6 @@ const userController = {
             res.status(400).json({ message: 'Invalid credentials', error: err.message });
         }
     },
-
-
-    async recoverPassword(req, res) {
-        try {
-            await userService.recoverPassword(req.body.email);
-            res.status(200).json({ message: 'Password recovery email sent' });
-        } catch (err) {
-            res.status(400).json({ message: 'Error sending recovery email', error: err.message });
-        }
-    }
 };
 
 module.exports = userController;

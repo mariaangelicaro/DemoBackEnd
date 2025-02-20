@@ -42,7 +42,7 @@ const imageService = {
     }
   },
 
-
+//  update todo
   async updateFavorite(username, imageUrl) {
     try {
       const image = await Image.findOne({ username, url: imageUrl });
