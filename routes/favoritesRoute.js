@@ -1,5 +1,5 @@
 const express = require('express');
-const { markAsFavorite, getFavorites, unmarkFavorite } = require('../services/imageService');
+const { markAsFavorite, getFavorites, unmarkFavorite, updateFavorite } = require('../services/imageService');
 
 const router = express.Router();
 
