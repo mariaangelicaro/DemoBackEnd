@@ -1,5 +1,6 @@
 const express = require('express');
-const { markAsFavorite } = require('../services/imageService');
+const { markAsFavorite, getFavorites } = require('../services/imageService');
+
 const router = express.Router();
 
 router.post('/favorites', async (req, res) => {
@@ -17,8 +18,8 @@ router.post('/favorites', async (req, res) => {
     }
   });
 
-  router.get('/favorites', async (req, res) => {
-    const { username } = req.query;
+  router.get('/favorites/:username', async (req, res) => {
+    const username = req.params.username;
     try {
       const favorites = await getFavorites(username);
       res.status(200).json(favorites);

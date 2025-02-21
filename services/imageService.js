@@ -19,7 +19,8 @@ const imageService = {
 
   async getFavorites(username) {
     try {
-      const favorites = await Image.find({ username });
+      const hardcodedUsername = 'mariarodri';
+      const favorites = await Image.find({ username: hardcodedUsername });
       return favorites;
     } catch (error) {
       throw new Error('Error fetching favorite images: ' + error.message);
