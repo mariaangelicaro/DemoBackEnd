@@ -30,7 +30,7 @@ const imageService = {
 
   async unmarkFavorite(username, imageUrl) {
     try {
-      const image = await Image.findOne({ username, url: imageUrl });
+      const image = await Image.findOneAndDelete({ username, url: imageUrl });
       if (!image) {
         return true;
       }
@@ -41,14 +41,14 @@ const imageService = {
     }
   },
 
-//  update todo
-  async updateFavorite(username, imageUrl) {
+
+  async updateFavorite(username, imageUrl, newTitle) {
     try {
       const image = await Image.findOne({ username, url: imageUrl });
       if (!image) {
         throw new Error('Image not found');
       }
-      image.favorite = true;
+      image.title = newTitle;
       await image.save();
       return image;
     } catch (error) {

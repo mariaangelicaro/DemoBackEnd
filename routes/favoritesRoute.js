@@ -1,5 +1,5 @@
 const express = require('express');
-const { markAsFavorite, getFavorites } = require('../services/imageService');
+const { markAsFavorite, getFavorites, unmarkFavorite } = require('../services/imageService');
 
 const router = express.Router();
 
@@ -41,5 +41,19 @@ router.post('/favorites', async (req, res) => {
       res.status(500).json({ message: 'Error unmarking image as favorite', error: error.message });
     }
   });
+
+
+  router.put('/favorites', async(req, res) => {
+    const { username, imageUrl, newTitle} = req.body;
+    try {
+      const result = await updateFavorite(username, imageUrl, newTitle);
+      if (result) {
+        res.status(200).json({ message: 'Image title successfully changed' });
+      }
+    } catch (error) {
+      console.error('Error changing image title:', error);
+      res.status(500).json({ message: 'Error changing image title', error: error.message });
+    }
+  })
   
   module.exports = router;
