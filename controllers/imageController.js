@@ -5,7 +5,6 @@ const imageController = {
   async markAsFavorite(req, res) {
     const { username } = req.params;
     const { imageUrl } = req.body;
-
     try {
       const image = await imageService.markAsFavorite(username, imageUrl);
       res.status(201).json({ message: 'Image marked as favorite successfully', image});
@@ -17,7 +16,6 @@ const imageController = {
 
   async getFavorites(req, res) {
     const { username } = req.params;
-
     try {
       const favorites = await imageService.getFavorites(username);
       res.status(200).json({ message: 'Favorite images retrieved successfully', favorites});
@@ -30,7 +28,6 @@ const imageController = {
   async unmarkFavorite(req, res) {
     const { username } = req.params;
     const { imageUrl } = req.body;
-
     try {
       const image = await imageService.unmarkFavorite(username, imageUrl);
       res.status(200).json({ message: 'Image unmarked from favorites successfully',image});
@@ -43,7 +40,6 @@ const imageController = {
   async updateFavorite(req, res) {
     const { username } = req.params;
     const { imageUrl } = req.body;
-
     try {
       const image = await imageService.updateFavorite(username, imageUrl);
       res.status(200).json({ message: 'Image updated to favorite successfully', image});

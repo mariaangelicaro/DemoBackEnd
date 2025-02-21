@@ -10,7 +10,7 @@ jest.mock('jsonwebtoken');
 describe('UserService', () => {
     describe('User Register', () => {
         test('it should register a user with hashed password', async () => {
-            //Arrange
+            
             const plainPassword = 'password';
             const hashedPassword = 'hashed_password';
             const expectedResult = new User({
@@ -22,14 +22,14 @@ describe('UserService', () => {
             bcrypt.hash.mockResolvedValue(hashedPassword);
             mockingoose(User).toReturn(expectedResult, 'save');
     
-            //Act
+            
             const result = await userService.register({
                 username: 'mariarodri',
                 email: 'maria@rodriguez.com',
                 password: plainPassword,
             });
     
-            //Assert
+            
             expect(result.username).toBe(expectedResult.username);
             expect(result.email).toBe(expectedResult.email);
             expect(result.password).toBe(expectedResult.password);

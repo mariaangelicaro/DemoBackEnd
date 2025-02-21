@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post('/favorites', async (req, res) => {
     const { username, imageUrl, title } = req.body;
-  
     try {
       const image = await markAsFavorite(username, imageUrl, title);
       res.status(200).json({
@@ -18,6 +17,7 @@ router.post('/favorites', async (req, res) => {
     }
   });
 
+
   router.get('/favorites/:username', async (req, res) => {
     const username = req.params.username;
     try {
@@ -28,6 +28,7 @@ router.post('/favorites', async (req, res) => {
       res.status(500).json({ message: 'Error fetching favorite images', error: error.message });
     }
   });
+  
   
   router.delete('/favorites', async (req, res) => {
     const { username, imageUrl } = req.body;
