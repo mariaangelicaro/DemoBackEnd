@@ -9,7 +9,7 @@ jest.mock('jsonwebtoken');
 describe('ImageService', () => {
     describe('Mark Favorite Photo', () => {
         test('It should mark a selected photo as favorite and save the URL', async () => {
-            //Arrange
+            
             const mockUsername = 'mariarodri'
             const imageUrl = 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg';
 
@@ -20,13 +20,13 @@ describe('ImageService', () => {
 
             mockingoose(Image).toReturn(expectedResult, 'save');
 
-            //Act
+            
             const result = await imageService.markAsFavorite(
                 'mariarodri',
                 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg',
             );
 
-            //Assert:
+
             expect(result.username).toBe(mockUsername);
             expect(result.url).toBe(imageUrl);
             expect(result.save).toHaveBeenCalled();
@@ -50,19 +50,18 @@ describe('ImageService', () => {
 
     describe('Get Favorite Photos', () => {
         test("It should return all favorite photos of a user", async () => {
-            //Arrange
+
             const mockUsername = 'mariarodri';
             const favoriteImages = [
                 { username: mockUsername, url: 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg', favorite: true},
                 { username: mockUsername, url: 'https://live.staticflickr.com/65535/54252837741_d51e71d6a7_6k.jpg', favorite: true}
             ];
-
             mockingoose(Image).toReturn(favoriteImages, 'find');
 
-            //Act
+
             const result = await imageService.getFavorites(mockUsername);
 
-            //Assert
+
             expect(result).toHaveLength(2);
             expect(result[0].url).toBe(favoriteImages[0].url);
             expect(result[1].url).toBe(favoriteImages[1].url);
@@ -70,8 +69,10 @@ describe('ImageService', () => {
       
           test('It should handle errors properly', async () => {
             const mockUsername = 'mariarodri';
+
       
             mockingoose(Image).toReturn(new Error(''), 'find');
+
       
             let result;
             try {
@@ -85,7 +86,7 @@ describe('ImageService', () => {
 
     describe('Unmark Favorite Photo', () => {
         test('It should remove a selected photo as favorite', async () => {
-            //Arrange
+
             const mockUsername = 'mariarodri'
             const imageUrl = 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg';
 
@@ -99,13 +100,13 @@ describe('ImageService', () => {
 
             mockingoose(Image).toReturn({ acknowledged: true, deletedCount: 1 }, 'deleteOne');
 
-            //Act
+
             const result = await imageService.unmarkFavorite(
                 'mariarodri',
                 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg',
             );
 
-            //Assert:
+
             expect(result).toBe(true);
         });
     });
