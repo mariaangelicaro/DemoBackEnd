@@ -2,11 +2,11 @@ const express = require('express');
 const { markAsFavorite } = require('../services/imageService');
 const router = express.Router();
 
-router.post('/api/favorites', async (req, res) => {
-    const { username, imageUrl } = req.body;
+router.post('/favorites', async (req, res) => {
+    const { username, imageUrl, title } = req.body;
   
     try {
-      const image = await markAsFavorite(username, imageUrl);
+      const image = await markAsFavorite(username, imageUrl, title);
       res.status(200).json({
         message: 'Image successfully marked as favorite',
         image,
@@ -17,7 +17,7 @@ router.post('/api/favorites', async (req, res) => {
     }
   });
 
-  router.get('/api/favorites', async (req, res) => {
+  router.get('/favorites', async (req, res) => {
     const { username } = req.query;
     try {
       const favorites = await getFavorites(username);
@@ -28,7 +28,7 @@ router.post('/api/favorites', async (req, res) => {
     }
   });
   
-  router.delete('/api/favorites', async (req, res) => {
+  router.delete('/favorites', async (req, res) => {
     const { username, imageUrl } = req.body;
     try {
       const result = await unmarkFavorite(username, imageUrl);
