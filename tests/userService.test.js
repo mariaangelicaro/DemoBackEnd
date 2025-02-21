@@ -70,8 +70,11 @@ describe('UserService', () => {
             bcrypt.compare.mockResolvedValue(true);
             mockingoose(User).toReturn(mockUser, 'findOne');
 
+            const mockJwtToken = 'some-jwt-token';
+            jwt.sign.mockReturnValue(mockJwtToken);
+
             const expectedResult = {
-                token: 'some-jwt-token',
+                token: mockJwtToken,
                 user: mockUser
             };
 
