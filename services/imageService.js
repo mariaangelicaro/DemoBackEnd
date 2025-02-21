@@ -2,13 +2,13 @@ const Image = require('../models/Image');
 
 const imageService = {
 
-  async markAsFavorite(username, imageUrl) {
+  async markAsFavorite(username, imageUrl, title) {
     try {
       const existingImage = await Image.findOne({ username, url: imageUrl });
       if (existingImage) {
-        throw new Error('Image already marked as favorite');
+        return existingImage;
       }
-      const image = new Image({ username, url: imageUrl, favorite: true });
+      const image = new Image({ username, url: imageUrl, title });
       await image.save();
       return image;
     } catch (error) {
@@ -19,10 +19,7 @@ const imageService = {
 
   async getFavorites(username) {
     try {
-      const favorites = await Image.find({ username, favorite: true });
-      if (!favorites.length) {
-        throw new Error('No favorite images found for this user');
-      }
+      const favorites = await Image.find({ username });
       return favorites;
     } catch (error) {
       throw new Error('Error fetching favorite images: ' + error.message);
@@ -34,8 +31,9 @@ const imageService = {
     try {
       const image = await Image.findOne({ username, url: imageUrl });
       if (!image) {
-        throw new Error('Image not found');
+        return true;
       }
+      image.deleteOne()
       return true;
     } catch (error) {
       throw new Error('Error unmarking image as favorite: ' + error.message);
