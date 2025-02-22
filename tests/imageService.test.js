@@ -110,4 +110,33 @@ describe('ImageService', () => {
             expect(result).toBe(true);
         });
     });
+
+
+    describe('Update Favorite Image', () => {
+        test('It should update the title of the selected favorite image', async () => {
+            const mockUsername = 'mariarodri';
+            const imageUrl = 'https://live.staticflickr.com/65535/54276891887_7ed013c8a4_4k.jpg';
+            const newTitle = 'Updated Title';
+    
+            const imageToUpdate = new Image({
+                username: mockUsername,
+                url: imageUrl,
+                title: 'Old Title',
+            });
+    
+
+            mockingoose(Image).toReturn(imageToUpdate, 'findOne');
+    
+
+            const updatedImage = { ...imageToUpdate.toObject(), title: newTitle };
+            mockingoose(Image).toReturn(updatedImage, 'save');
+    
+            const result = await imageService.updateFavorite(mockUsername, imageUrl, newTitle);
+    
+            expect(result.username).toBe(mockUsername);
+            expect(result.url).toBe(imageUrl);
+            expect(result.title).toBe(newTitle);
+            expect(result.save).toHaveBeenCalled();
+        });
+    });
 });
