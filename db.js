@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/FlickrImageBrowser', {
+    await mongoose.connect('mongodb+srv://mariaangelica:ZpxQC4sakymhLiLL@flickrfavoritesapp.mmgba.mongodb.net/?retryWrites=true&w=majority&appName=FlickrFavoritesApp', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
