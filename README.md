@@ -22,6 +22,6 @@ Installation and Setup
 
 Steps to run the application
 1. Clone the repository using this link: https://github.com/mariaangelicaro/FlickrFavoritesAppBackend.git
-2. In a Terminal navigate to the Demo directory using this line: cd DemoBackend.
+2. In a Terminal navigate to the Demo directory using this line: cd FlickrFavoritesAppBackend.
 3. Install Dependencies using this line: npm install.
 4. Start the backend server using this line: npm start
